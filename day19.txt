@@ -1,0 +1,59 @@
+//汽水瓶
+#include <iostream>
+using namespace std;
+int main()
+{
+    int empty,water;
+    while(cin>>empty)
+    {
+        int count = 0;
+        while(empty > 2)
+        {
+            water = empty/3;
+            count += water;
+            empty = water + (empty % 3);
+        }
+        if(empty == 1)
+            count += 0;
+        if(empty == 2)
+            count += 1;
+        cout<<count<<endl;
+    }
+    return 0;
+}
+
+//查找两个字符串a,b中的最长公共子串
+#include<iostream>
+#include<vector>
+#include<string> 
+using namespace std;
+
+int main()
+{
+    string str1, str2;
+    while (cin >> str1 >> str2)
+    {
+        if(str1.size() > str2.size())
+            swap(str1, str2);
+        
+        int len1 = str1.size(), len2 = str2.size(), max = 0, start = 0;
+        vector<vector<int> > dp(len1+1, vector<int>(len2+1, 0));
+        for (int i = 1; i <= len1; ++i)
+        {
+            for (int j = 1; j <= len2; ++j)
+            {
+                if (str1[i-1] == str2[j-1])
+                {
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
+                }
+                if(dp[i][j] > max)
+                {
+                    max = dp[i][j];
+                    start = i - max;
+                }
+            }
+        }
+        cout << str1.substr(start,max) << endl;
+    }
+    return 0;
+}
