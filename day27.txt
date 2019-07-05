@@ -1,28 +1,36 @@
 #include <iostream>
-#include <string>
 using namespace std;
+#define ADD(a,b)((a)+(b))
+#define BIG(a,b)((a)>(b))
 
 int main()
 {
-	string s;
-	while (cin >> s)
-	{
-		int n = 0;
-		for (int i = 0; i < s.size(); i++)
-		{
-			n += s[i] - '0';
-		}
-		while (n > 9)
-		{
-			int sum = 0;
-			while (n > 0)
-			{
-				sum += n % 10;
-				n /= 10;
-			}
-			n = sum;
-		}
-		cout << n << endl;
-	}
-	return 0;
+    double a,b,c;
+    while(cin >> a >> b >> c)
+    {
+        if(BIG(ADD(a,b),c) && BIG(ADD(a,c),b) && BIG(ADD(b,c),a))
+            cout<<"Yes"<<endl;
+        else
+        {
+            cout<<"No"<<endl;
+        }
+        
+    }
+    return 0;
 }
+
+class Solution {
+public:
+    int Add(int num1, int num2)
+    {
+        int sum,tmp;
+        while(num2 != 0)
+        {
+            sum = num1 ^ num2;
+            tmp = (num1 & num2)<<1;
+            num1 = sum;
+            num2 = tmp;
+        }
+        return num1;
+    }
+};
