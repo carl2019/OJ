@@ -1,0 +1,120 @@
+//ÂæÍÕÃüÃû·¨
+// write your code here cpp
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+int main()
+{
+    string str;
+    while(getline(cin, str))
+    {
+        string ret;
+        char ch;
+        for(int i = 0; i < str.length(); i++)
+        {
+            if(str[i] == '_')
+            {
+                ch = toupper(str[++i]);
+                ret += ch;
+            }
+            else
+            {
+                ret += str[i];
+            }
+        }
+        cout << ret << endl;
+    }
+    return 0;
+}
+
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+ 
+int main(int argc, char** argv)
+{
+    string s;
+    while (cin >> s)
+    {
+        for (int i = 0; i < s.size(); ++i)
+        {
+            if (s[i] == '_') continue;
+            if (i > 0 && s[i - 1] == '_') cout << (char)toupper(s[i]);
+            else cout << s[i];
+        }
+        cout << endl;
+    }
+    return 0;
+}
+
+// write your code here cpp
+#include <iostream>
+#include <string>
+using namespace std;
+int main()
+{
+    string str;
+    while(getline(cin , str))
+    {
+        string s;
+        for(int i = 0; i < str.size(); i++)
+        {
+            if(str[i] == '_')
+            {
+               i = i + 1;
+               str[i] -= 32;
+               s += str[i];
+            }
+            else
+            {
+                s += str[i];
+            }
+        }
+        for(int i = 0; i < s.size();i++)
+        {
+            cout << s[i];
+        }
+        cout << endl;
+    }
+    return 0;
+}
+
+//µ¥´Êµ¹ÅÅ
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+int main()
+{
+    string s;
+    while(getline(cin, s))
+    {
+        vector<string> v;
+        string tmp= "";
+        for(int i = 0; i <s.size(); i++)
+        {
+            if((s[i] <= 'Z' && s[i] >= 'A') || (s[i] <= 'z' && s[i] >= 'a'))
+                tmp += s[i];
+            else
+            {
+                if(tmp.size() > 0)
+                {
+                    v.push_back(tmp);
+                    tmp.clear();
+                }
+            }
+        }
+        if(tmp.size() > 0)
+            v.push_back(tmp);
+        for(int i = v.size() - 1; i > 0; --i)
+        {
+            cout<<v[i]<<' ';
+        }
+        cout<<v[0]<<endl;
+    }
+    return 0;
+}
