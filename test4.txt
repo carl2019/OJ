@@ -1,0 +1,61 @@
+#include <iostream>
+using namespace std;
+
+class processInt
+{
+public:
+	processInt()
+	{
+		i = 0;
+	}
+	void store(int v)
+	{
+		origin[i] = v;
+		storage[i] = negateInt(v);
+		i++;
+	}
+
+	void output()
+	{
+		for (int j = 0; j<i; j++)
+		{
+			cout << origin[j] << " " << storage[j] << endl;
+		}
+	}
+	int i;
+	int storage[10];
+	int origin[10];
+
+private:
+	int negateInt(int x)
+	{
+		int newV = 0;
+		while (x){
+			newV = newV * 10 + x % 10;
+			x /= 10;
+		}
+		return newV;
+	}
+};
+int main()
+{
+	int x;
+	int count = 0;
+	processInt process;
+	while (cin >> x)
+	{
+		if (x == 0)
+		{
+			process.output();
+			break;
+		}
+		process.store(x);
+		count++;
+		if (count == 10)
+		{
+			process.output();
+			break;
+		}
+	}
+	return 0;
+}
