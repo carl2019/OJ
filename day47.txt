@@ -1,0 +1,73 @@
+//Emacs¼ÆËãÆ÷
+#include <iostream>
+#include <string>
+#include <stack>
+#include <cmath>
+#include <vector>
+using namespace std;
+int atoi(string str)
+{
+	int size = str.size();
+	int res = 0;
+	for (int i = 0; i < size; i++)
+	{
+		res += (str[i] - '0')*pow(10, size - i - 1);
+	}
+	return res;
+}
+int main()
+{
+	int n;
+	while (cin >> n)
+	{
+		vector<string> str;
+		for (int i = 0; i<n; i++)
+		{
+			string tmp;
+			cin >> tmp;
+			str.push_back(tmp);
+		}
+		int size = str.size();
+		stack<int> st;
+		for (int i = 0; i < size; ++i)
+		{
+			if (str[i] != "+"&&str[i] != "-"&&str[i] != "*"&&str[i] != "/")
+				st.push(atoi(str[i]));
+			if (str[i] == "+")
+			{
+				int a = st.top();
+				st.pop();
+				int b = st.top();
+				st.pop();
+				st.push(a + b);
+			}
+			if (str[i] == "-")
+			{
+				int a = st.top();
+				st.pop();
+				int b = st.top();
+				st.pop();
+				st.push(b - a);
+			}
+			if (str[i] == "*")
+			{
+				int a = st.top();
+				st.pop();
+				int b = st.top();
+				st.pop();
+				st.push(a*b);
+			}
+			if (str[i] == "/")
+			{
+				int a = st.top();
+				st.pop();
+				int b = st.top();
+				st.pop();
+				st.push(b / a);
+			}
+		}
+		int top = st.top();
+		cout << top << endl;
+	}
+	return 0;
+}
