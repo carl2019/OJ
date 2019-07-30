@@ -1,0 +1,46 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+const int INF = 1e5 + 5;
+void Count(vector<vector<char>> &map, vector<vector<int>> &len, int x, int y)
+{
+	if (x < 1 || y < 1 || x > 8 || y > 8 || map[x][y] == '#')
+		return;
+	int MIN = min(min(len[x - 1][y], len[x + 1][y]), min(len[x][y - 1], len[x][y + 1])) + 1;
+	if (MIN < len[x][y])
+		len[x][y] = MIN;
+	else
+		return;
+
+	Count(map, len, x, y - 1);
+	Count(map, len, x, y + 1);
+	Count(map, len, x - 1, y);
+	Count(map, len, x + 1, y);
+
+}
+
+int main()
+{
+	vector<vector<char>> map(10, vector<char>(10));
+	while (cin >> map[0][0])
+	{
+		vector<vector<int>> v(10, vector<int>(10, INF));
+		for (int i = 0; i <10; i++)
+		{
+			for (int j = 0; j < 10; j++)
+			{
+				if (i == 0 && j == 0)
+					continue;
+				char t;
+				cin >> t;
+				map[i][j] = t;
+			}
+		}
+		v[0][1] = 0;
+		Count(map, v, 1, 1);
+		cout << v[8][8] + 1 << endl;
+
+	}
+	return 0;
+}
