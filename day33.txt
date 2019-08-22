@@ -1,0 +1,22 @@
+class Solution {
+public:
+	int minimumTotal(vector<vector<int>> &triangle)
+	{
+		if (triangle.empty())
+		{
+			return 0;
+		}
+	    // F[n-1][n-1],...F[n-1][0]初始化
+		vector<vector<int>> min_sum(triangle);
+		int line = triangle.size();
+		// 从倒数第二行开始
+		for (int i = line - 2; i >= 0; i--){
+			for (int j = 0; j <= i; j++){
+				// F(i,j) = min( F(i+1, j), F(i+1, j+1)) + triangle[i][j]
+				min_sum[i][j] = min(min_sum[i + 1][j], min_sum[i + 1][j + 1]) +
+					triangle[i][j];
+			}
+		}
+		return min_sum[0][0];
+	}
+};
