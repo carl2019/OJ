@@ -1,0 +1,30 @@
+//变态跳台阶
+//有一阶的时候 f(1) = 1; 有两阶的时候可以有 f(2) = 1 + f(1) = 2; 
+//有三阶的时候可以有 f(3) =1 + f(2) + f(1) = 4;
+//总跳法为: f(n) = 1 + f(n - 1) + f(n - 2) + .... + f(1) （第一个1是跳n阶只有一种方法）
+//依次类推，得到类推公式有n阶时：f(n) = 2 ^ (n - 1)。
+class Solution {
+public:
+	int jumpFloorII(int number) {
+		//2^(n-1) == 1 << (n-1)
+		return 1 << (number - 1);
+	}
+};
+
+//快到碗里来
+//通过输入碗半径计算得到周长，与输入的猫的身长相比较
+
+#include <iostream>
+using namespace std;
+int main(){
+	double n, r;
+	while (cin >> n >> r){
+		//周长：2*r*3.1415
+		//身长：n
+		if (n > (2 * r*3.1415))
+			cout << "No" << endl;
+		else
+			cout << "Yes" << endl;
+	}
+	return 0;
+}
